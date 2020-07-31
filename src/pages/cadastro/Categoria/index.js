@@ -26,8 +26,9 @@ function CadastroCategoria() {
   }
 
   useEffect(() => {
-    console.log('alo alo w brazil');
-    const URL_DB = 'http://localhost:8080/categorias';
+    const URL_DB = window.location.hostname.includes('localhost') 
+      ? 'http://localhost:8080/categorias'
+      : 'https://feresflix.herokuapp.com/categorias';
     fetch(URL_DB)
       .then(async (respostaDoServidor) => {
         const resposta = await respostaDoServidor.json();
@@ -35,23 +36,6 @@ function CadastroCategoria() {
           ...resposta,
         ]);
       });
-    // setTimeout(() => {
-    //   setCategorias([
-    //     ...categorias,
-    //     {
-    //       id: 1,
-    //       nome: 'Front End',
-    //       descricao: 'Uma categoria bacanudassa',
-    //       cor: '#CBD1FF',
-    //     },
-    //     {
-    //       id: 2,
-    //       nome: 'Back End',
-    //       descricao: 'Outra categoria bacanudassa',
-    //       cor: '#CBD1FF',
-    //     },
-    //   ]);
-    // }, 4 * 1000);
   }, []);
 
   return (
